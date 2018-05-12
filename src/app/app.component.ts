@@ -31,24 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   constructor(private mainService: MainService, private d3Service: D3Service, private ref: ChangeDetectorRef) {
-    /*const N = APP_CONFIG.N,
-      getIndex = number => number - 1;
-
-    for (let i = 1; i <= N; i++) {
-      this.nodes.push(new Node(i, 'label', 1));
-    }
-
-    for (let i = 1; i <= N; i++) {
-      for (let m = 2; i * m <= N; m++) {
-        //this.nodes[getIndex(i)].linkCount++;
-        //this.nodes[getIndex(i * m)].linkCount++;
-
-        this.links.push(new Link(i, i * m, 0));
-      }
-    }
-    console.log(this.nodes);
-    console.log(this.links);*/
-    this.fetchData();
+    this.fetchData(); // set on Button click
   }
 
   ngOnInit() {
