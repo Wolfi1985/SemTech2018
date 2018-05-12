@@ -1,0 +1,38 @@
+{
+  "data": [{
+      "subject": 1,
+      "predicate": "ex:hasFood",
+      "object": 1
+    },
+    {
+      "subject": 1,
+      "predicate": "rdf:type",
+      "object": 3
+    },
+    {
+      "subject": 1,
+      "predicate": "ex:includes",
+      "object": 4
+    },
+    {
+      "subject": 1,
+      "predicate": "ex:includes",
+      "object": 4
+    },
+    {
+      "subject": 1,
+      "predicate": "ex:includes",
+      "object": 5
+    },
+    {
+      "subject": 5,
+      "predicate": "ex:hasTaste",
+      "object": 6
+    },
+    {
+      "subject": 4,
+      "predicate": "ex:hasTaste",
+      "object": 7
+    }
+  ]
+}

@@ -15,7 +15,7 @@ export class MainService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  getService(url: string, callback: Function) {
+  public fetchData(url: string, callback: Function) {
     this.http
       .get(url, this.options)
       .toPromise()
@@ -30,9 +30,41 @@ export class MainService {
     const body = res.json();
     return body || {};
   }
-
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
+  }
+
+  /**define graph with nodes and links */
+  public triplesToGraph(triples: any) {
+
+    const graph = { nodes: [], links: [] };
+
+    triples.forEach((triple) => {
+      const subjId = triple.subject;
+      const predId = triple.predicate;
+      const objId = triple.object;
+
+      let subjNode = this.filterNodesById(graph.nodes, subjId)[0];
+      let objNode = this.filterNodesById(graph.nodes, objId)[0];
+
+      if (subjNode == null) {
+        subjNode = { id: subjId, label: subjId, weight: 1 };
+        graph.nodes.push(subjNode);
+      }
+
+      if (objNode == null) {
+        objNode = { id: objId, label: objId, weight: 1 };
+        graph.nodes.push(objNode);
+      }
+
+
+      graph.links.push({ source: subjNode, target: objNode, predicate: predId, weight: 1 });
+    });
+
+    return graph;
+  }
+  private filterNodesById(nodes, id) {
+    return nodes.filter((n) => n.id === id);
   }
 }
