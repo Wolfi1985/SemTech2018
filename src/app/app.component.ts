@@ -1,7 +1,9 @@
-import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import APP_CONFIG from './app.config';
 import { Node, Link } from './d3';
-import { D3Service, ForceDirectedGraph} from './d3';
+import { D3Service, ForceDirectedGraph } from './d3';
+
+import { ModalFilterComponent } from './modal-filter/modal-filter.component';
 
 import { MainService } from './main/main.service';
 
@@ -13,14 +15,17 @@ import { MainService } from './main/main.service';
 
 
 export class AppComponent implements OnInit {
+
+  @ViewChild('modalFilter') modalFilter: ModalFilterComponent;
+
   title = 'app';
-
-
 
   nodes: Node[] = [];
   links: Link[] = [];
 
   public data;
+
+
 
   graph: ForceDirectedGraph;
   private _options: { width, height } = { width: 800, height: 600 };
@@ -31,22 +36,41 @@ export class AppComponent implements OnInit {
   }
 
   constructor(private mainService: MainService, private d3Service: D3Service, private ref: ChangeDetectorRef) {
-    this.fetchData(); // set on Button click
   }
 
   ngOnInit() {
-
+    this.mainService.setModalFilterWindow(this.modalFilter);
   }
 
+  /**filter data on button click*/
+  public filter() {
+    console.log('now');
+    this.resetData();
+    this.modalFilter.show();
+    this.fetchData();
+  }
+
+
+  /**fetch data from REST-API */
   fetchData() {
     this.mainService.fetchData('assets/mockingData.json', (data) => this.fetchDataDone(data)); // patch to API after backend is finished
   }
-
+  /**set data when fetched*/
   fetchDataDone(data: any) {
     this.data = data;
     this.drawGraph();
   }
 
+  /**reset Nodes and links */
+  resetData() {
+    this.nodes = [];
+    this.links = [];
+    this.data = [];
+  }
+
+  /** draw graph
+   * will be restructured
+  */
   drawGraph() {
     // call draw graph method
     const graph = this.mainService.triplesToGraph(this.data.data);

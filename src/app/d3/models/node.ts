@@ -10,6 +10,7 @@ export class Node implements d3.SimulationNodeDatum {
   fx?: number | null;
   fy?: number | null;
 
+
   id: string;
   label: string;
   weight: number;
@@ -22,12 +23,6 @@ export class Node implements d3.SimulationNodeDatum {
     this.label = label;
     this.weight = weight;
     this.index = 0;
-    /*this.x = 5;
-    this.y = 5;
-    this.vx = 5;
-    this.vy = 5;
-    this.fx = 200;
-    this.fy = 200;*/
   }
 
   normal = () => {

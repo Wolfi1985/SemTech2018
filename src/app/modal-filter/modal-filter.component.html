@@ -1,0 +1,23 @@
+<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'in':visibleAnimate}" [ngStyle]="{'display':visible ? 'block':'none','opacity': visibleAnimate ? 1 : 0}"
+  style="padding-top:150px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Select parent element</h4>
+      </div>
+      <div class="modal-body">
+        <label for="parent">Enter parent element</label>
+        <input type="text" class="form-control" id="parent" placeholder="Enter parent element">
+        <label for="depth">Enter the depth (max 3)</label>
+        <input type="text" class="form-control" id="depth" placeholder="Depth (max 3)">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="getData()" #loadButton>Load</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

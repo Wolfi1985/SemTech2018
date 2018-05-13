@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 // components
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+import { ModalFilterComponent } from './modal-filter/modal-filter.component';
 
 // services
 import { MainService } from './main/main.service';
@@ -17,7 +18,8 @@ import { SHARED_VISUALS } from './visuals/shared';
   declarations: [
     AppComponent,
     ...SHARED_VISUALS,
-    ...D3_DIRECTIVES
+    ...D3_DIRECTIVES,
+    ModalFilterComponent
   ],
   imports: [
     BrowserModule,

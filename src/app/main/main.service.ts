@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
+import { ModalFilterComponent } from '../modal-filter/modal-filter.component';
+
 @Injectable()
 export class MainService {
   headers: Headers;
   options: RequestOptions;
+
+  private modalFilterWindow: ModalFilterComponent;
 
   constructor(private http: Http) {
     this.headers = new Headers({
@@ -66,5 +70,20 @@ export class MainService {
   }
   private filterNodesById(nodes, id) {
     return nodes.filter((n) => n.id === id);
+  }
+
+  // set modal window
+  public setModalFilterWindow(modalFilterWindow: ModalFilterComponent) {
+    this.modalFilterWindow = modalFilterWindow;
+  }
+
+  // show modal window
+  public showFilter() {
+    this.modalFilterWindow.show();
+  }
+
+  // hide modal window
+  public hideFilter() {
+    this.modalFilterWindow.hide();
   }
 }
