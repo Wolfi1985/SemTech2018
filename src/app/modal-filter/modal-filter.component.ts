@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'modal-filter',
@@ -8,9 +8,14 @@ export class ModalFilterComponent implements OnInit {
 
     public visible = false;
     public visibleAnimate = false;
+    options = [];
+    optionSelected: any;
+    public parentElem: string;
 
+    @Output() loadData = new EventEmitter<any>();
     constructor() {
-
+        this.options.push(1, 2, 3);
+        this.optionSelected = 1;
     }
 
     ngOnInit() {
@@ -30,5 +35,10 @@ export class ModalFilterComponent implements OnInit {
         if ((<HTMLElement>event.target).classList.contains('modal')) {
             this.hide();
         }
+    }
+
+    public fetchData() {
+        this.loadData.emit({parent: this.parentElem, depth: this.optionSelected});
+        this.hide();
     }
 }

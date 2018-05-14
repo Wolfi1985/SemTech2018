@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'in':visibleAnimate}" [ngStyle]="{'display':visible ? 'block':'none','opacity': visibleAnimate ? 1 : 0}"
-  style="padding-top:150px;">
+  style="padding-top:200px;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,13 +7,16 @@
       </div>
       <div class="modal-body">
         <label for="parent">Enter parent element</label>
-        <input type="text" class="form-control" id="parent" placeholder="Enter parent element">
-        <label for="depth">Enter the depth (max 3)</label>
-        <input type="text" class="form-control" id="depth" placeholder="Depth (max 3)">
+        <input type="text" class="form-control" id="parent" [(ngModel)]="parentElem" placeholder="Enter parent element">
+        <!--<label for="depth">Enter the depth (max 3)</label>-->
+        <label style="margin-top:10px;" for="depth">Select depth</label>
+        <select class="form-control" id="depth" required [(ngModel)]='optionSelected'>
+          <option *ngFor='let option of options' [value]="option">{{option}}</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Close</button>
-    <button type="button" class="btn btn-primary" (click)="getData()" #loadButton>Load</button>
+        <button type="button" class="btn btn-primary" (click)="fetchData()" #loadButton>Load</button>
       </div>
     </div>
     <!-- /.modal-content -->

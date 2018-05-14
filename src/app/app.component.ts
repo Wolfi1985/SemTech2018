@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
 
   public data;
 
-
-
   graph: ForceDirectedGraph;
   private _options: { width, height } = { width: 800, height: 600 };
 
@@ -40,19 +38,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.mainService.setModalFilterWindow(this.modalFilter);
+    this.modalFilter.show();
   }
 
   /**filter data on button click*/
   public filter() {
-    console.log('now');
     this.resetData();
     this.modalFilter.show();
-    this.fetchData();
+    // this.fetchData();
   }
 
 
   /**fetch data from REST-API */
-  fetchData() {
+  fetchData(event: object) {
+    const parentElem = event['parent'];
+    const depth = event['depth'];
+    console.log(parentElem + ' ' + depth);
     this.mainService.fetchData('assets/mockingData.json', (data) => this.fetchDataDone(data)); // patch to API after backend is finished
   }
   /**set data when fetched*/

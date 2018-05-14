@@ -1,8 +1,8 @@
-<div class="container-fluid text-center m-5">
+<div class="container-fluid text-center mt-4">
     <h1>Visualizing RDF using D3</h1>
     <button type="button" class="btn btn-outline-primary float-left" (click)="filter()">Filter</button>
 </div>
-<modal-filter #modalFilter></modal-filter>
+<modal-filter #modalFilter (loadData)="fetchData($event)"></modal-filter>
 
 <svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
     <g [zoomableOf]="svg">
