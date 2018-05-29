@@ -1,4 +1,4 @@
-<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'">
+<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'" (click)="showDetails()" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
     <svg:circle
         class="node"
         [attr.fill]="node.color"

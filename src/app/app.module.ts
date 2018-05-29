@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 // components
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
 import { ModalFilterComponent } from './modal-filter/modal-filter.component';
 
 // services

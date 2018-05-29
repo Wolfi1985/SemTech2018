@@ -39,6 +39,6 @@ export class ModalFilterComponent implements OnInit {
 
     public fetchData() {
         this.loadData.emit({parent: this.parentElem, depth: this.optionSelected});
-        this.hide();
+        // this.hide();
     }
 }

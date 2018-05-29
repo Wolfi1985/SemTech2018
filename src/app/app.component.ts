@@ -1,4 +1,8 @@
-import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy,
+  OnInit, AfterViewInit, ViewChild
+} from '@angular/core';
+
 import APP_CONFIG from './app.config';
 import { Node, Link } from './d3';
 import { D3Service, ForceDirectedGraph } from './d3';
@@ -22,6 +26,7 @@ export class AppComponent implements OnInit {
 
   nodes: Node[] = [];
   links: Link[] = [];
+  parentElem: any;
 
   public data;
 
@@ -45,20 +50,26 @@ export class AppComponent implements OnInit {
   public filter() {
     this.resetData();
     this.modalFilter.show();
-    // this.fetchData();
   }
 
 
   /**fetch data from REST-API */
   fetchData(event: object) {
-    const parentElem = event['parent'];
+    this.parentElem = event['parent'];
     const depth = event['depth'];
-    console.log(parentElem + ' ' + depth);
-    this.mainService.fetchData('assets/mockingData.json', (data) => this.fetchDataDone(data)); // patch to API after backend is finished
+    console.log(this.parentElem + ' ' + depth);
+
+    if (this.parentElem != null && this.parentElem !== undefined && this.parentElem !== '') {
+      this.mainService.fetchData('http://localhost:5000/api/query/' + this.parentElem + '/'
+        + depth, (data) => this.fetchDataDone(data));
+    } else {
+      alert('Please enter a parent element!');
+    }
   }
   /**set data when fetched*/
   fetchDataDone(data: any) {
     this.data = data;
+    // console.log(this.data);
     this.drawGraph();
   }
 
@@ -78,10 +89,12 @@ export class AppComponent implements OnInit {
 
     // setting nodes
     for (const g in graph.nodes) {
-      if (g !== null || g !== undefined) {
-        this.nodes.push(new Node(graph.nodes[g].id, graph.nodes[g].label, graph.nodes[g].weight));
+      if (g !== null && g !== undefined) {
+        this.nodes.push(new Node(graph.nodes[g].id, graph.nodes[g].label, graph.nodes[g].weight, false));
       }
     }
+    this.nodes[0].isParent=true;
+    console.log(this.nodes[0]);
 
     let source;
     let target;

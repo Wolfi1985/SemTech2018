@@ -2,37 +2,65 @@
   "data": [{
       "subject": "ex:ThaiLand",
       "predicate": "ex:hasFood",
-      "object": "ex:TomYumKung"
+      "object": "ex:TomYumKung",
+      "log": {
+        "visited": 2,
+        "something": true
+      }
     },
     {
       "subject": "ex:TomYumKung",
       "predicate": "rdf:type",
-      "object": "ex:SpicyFood"
+      "object": "ex:SpicyFood",
+      "log": {
+        "visited": 2,
+        "something": true
+      }
     },
     {
       "subject": "ex:TomYumKung",
       "predicate": "ex:includes",
-      "object": "ex:shrimp"
+      "object": "ex:shrimp",
+      "log": {
+        "visited": 0,
+        "something": true
+      }
     },
     {
       "subject": "ex:TomYumKung",
       "predicate": "ex:includes",
-      "object": "ex:chilly"
+      "object": "ex:chilly",
+      "log": {
+        "visited": 9,
+        "something": true
+      }
     },
     {
       "subject": "ex:TomYumKung",
       "predicate": "ex:includes",
-      "object": "ex:lemon"
+      "object": "ex:lemon",
+      "log": {
+        "visited": 5,
+        "something": false
+      }
     },
     {
       "subject": "ex:lemon",
       "predicate": "ex:hasTaste",
-      "object": "ex:sour"
+      "object": "ex:sour",
+      "log": {
+        "visited": 7,
+        "something": true
+      }
     },
     {
       "subject": "ex:chilly",
       "predicate": "ex:hasTaste",
-      "object": "ex:spicy"
+      "object": "ex:spicy",
+      "log": {
+        "visited": 6,
+        "something": false
+      }
     }
   ]
 }

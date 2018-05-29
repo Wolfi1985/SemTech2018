@@ -21,10 +21,11 @@ export class MainService {
 
   public fetchData(url: string, callback: Function) {
     this.http
-      .get(url, this.options)
+      .get(url)
       .toPromise()
       .then(
         res => {
+          this.hideFilter();
           callback(res.json());
         }
       )
@@ -35,7 +36,10 @@ export class MainService {
     return body || {};
   }
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
+    console.error('An error occurred while loading data', error);
+    if (error.status === 404) {
+      alert('Data couldn\'t be found, please enter a valid ID!');
+    }
     return Promise.reject(error.message || error);
   }
 
@@ -44,32 +48,61 @@ export class MainService {
 
     const graph = { nodes: [], links: [] };
 
+    let subjId;
+    let predId;
+    let objId;
+    let log;
+    let visited;
+
     triples.forEach((triple) => {
-      const subjId = triple.subject;
-      const predId = triple.predicate;
-      const objId = triple.object;
+
+      console.log(triple);
+      if (this.checkIfExists(triple.subject)) {
+        subjId = triple.subject;
+        console.log(subjId);
+      }
+      if (this.checkIfExists(triple.predicate)) {
+        predId = triple.predicate;
+      }
+      if (this.checkIfExists(triple.object)) {
+        objId = triple.object;
+      }
+
+      if (this.checkIfExists(triple.log)) {
+        log = triple.log;
+
+        if (this.checkIfExists(log.visited)) {
+          visited = log.visited;
+        }
+      }
 
       let subjNode = this.filterNodesById(graph.nodes, subjId)[0];
       let objNode = this.filterNodesById(graph.nodes, objId)[0];
 
       if (subjNode == null) {
-        subjNode = { id: subjId, label: subjId, weight: 1 };
+        subjNode = { id: subjId, label: subjId, weight: 1, visited: visited };
         graph.nodes.push(subjNode);
       }
 
       if (objNode == null) {
-        objNode = { id: objId, label: objId, weight: 1 };
+        objNode = { id: objId, label: objId, weight: 1, visited: visited };
         graph.nodes.push(objNode);
       }
 
 
       graph.links.push({ source: subjNode, target: objNode, predicate: predId, weight: 1 });
     });
-
     return graph;
   }
   private filterNodesById(nodes, id) {
     return nodes.filter((n) => n.id === id);
+  }
+  private checkIfExists(data: any) {
+    if (data !== undefined && data !== null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // set modal window

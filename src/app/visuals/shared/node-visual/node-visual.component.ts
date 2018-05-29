@@ -8,4 +8,8 @@ import { Node } from '../../../d3';
 })
 export class NodeVisualComponent {
   @Input('nodeVisual') node: Node;
+
+  showDetails() {
+    console.log(this.node.id);
+  }
 }

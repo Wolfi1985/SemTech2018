@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <label for="parent">Enter parent element</label>
-        <input type="text" class="form-control" id="parent" [(ngModel)]="parentElem" placeholder="Enter parent element">
+        <input type="text" class="form-control" id="parent" [(ngModel)]="parentElem" placeholder="Enter parent element" required>
         <!--<label for="depth">Enter the depth (max 3)</label>-->
         <label style="margin-top:10px;" for="depth">Select depth</label>
         <select class="form-control" id="depth" required [(ngModel)]='optionSelected'>

@@ -15,14 +15,16 @@ export class Node implements d3.SimulationNodeDatum {
   label: string;
   weight: number;
   linkCount = 0;
+  isParent: boolean;
 
 
-  constructor(id, label, weight) {
+  constructor(id, label, weight, isParent) {
 
     this.id = id;
     this.label = label;
     this.weight = weight;
     this.index = 0;
+    this.isParent = isParent;
   }
 
   normal = () => {
@@ -43,6 +45,11 @@ export class Node implements d3.SimulationNodeDatum {
   get color() {
     // const index = Math.floor(APP_CONFIG.SPECTRUM.length * this.normal());
     // return APP_CONFIG.SPECTRUM[index];
-    return 'rgb(176,212,243)';
+    if (this.isParent === true) {
+      return 'rgb(255,0,0)';
+    } else {
+      return 'rgb(176,212,243)';
+    }
   }
+
 }

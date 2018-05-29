@@ -16,6 +16,6 @@ export class Link implements d3.SimulationLinkDatum<Node> {
   }
   get fontSize() {
     // return (30 * this.normal() + 10) + 'px';
-    return 15;
+    return 10;
   }
 }
