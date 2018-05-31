@@ -1,14 +1,18 @@
-<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'" (click)="showDetails()" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-    <svg:circle
-        class="node"
-        [attr.fill]="node.color"
-        cx="0"
-        cy="0"
-        [attr.r]="node.r">
-    </svg:circle>
-    <svg:text
-        class="node-name"
-        [attr.font-size]="node.fontSize">
-      {{node.id}}
-    </svg:text>
+<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'" (mouseover)="showPopup()" (mouseout)="hidePopup(node)">
+  <svg:circle class="node" [attr.fill]="node.color" cx="0" cy="0" [attr.r]="node.r">
+  </svg:circle>
+  <svg:text *ngIf="(showDetail===false && activateDetail===false) || (showDetail===true && activateDetail===false) || (showDetail===false && activateDetail===true)"
+    class="node-name" [attr.font-size]="node.fontSize">
+    {{node.id}}
+  </svg:text>
+  <!--svg:text *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize">
+    {{node.id}} {{node.weight}}
+  </svg:text -->
+  <g *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize">
+    <rect x="2" y="2" rx="10" ry="10" width="160" height="80" fill="light-grey" fill-opacity="0.4"></rect>
+    <text x="7" y="7" font-family="Verdana" font-size="15" fill="white">
+      <tspan x="5" dy="1.5em">{{node.id}}</tspan>
+      <tspan x="5" dy="1.5em">{{node.weight}}</tspan>
+    </text>
+  </g>
 </svg:g>

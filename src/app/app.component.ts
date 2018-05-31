@@ -28,6 +28,9 @@ export class AppComponent implements OnInit {
   links: Link[] = [];
   parentElem: any;
 
+  private showButtons: boolean;
+  private showDetails: boolean;
+
   public data;
 
   graph: ForceDirectedGraph;
@@ -44,12 +47,18 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.mainService.setModalFilterWindow(this.modalFilter);
     this.modalFilter.show();
+    this.showButtons = false;
+    this.showDetails = false;
+  }
+  private setShowDetails() {
+    this.mainService.setShowDetails(this.showDetails);
   }
 
   /**filter data on button click*/
   public filter() {
     this.resetData();
     this.modalFilter.show();
+    this.showButtons = false;
   }
 
 
@@ -69,8 +78,9 @@ export class AppComponent implements OnInit {
   /**set data when fetched*/
   fetchDataDone(data: any) {
     this.data = data;
-    // console.log(this.data);
+    console.log(this.data);
     this.drawGraph();
+    this.showButtons = true;
   }
 
   /**reset Nodes and links */
@@ -93,7 +103,7 @@ export class AppComponent implements OnInit {
         this.nodes.push(new Node(graph.nodes[g].id, graph.nodes[g].label, graph.nodes[g].weight, false));
       }
     }
-    this.nodes[0].isParent=true;
+    this.nodes[0].isParent = true;
     console.log(this.nodes[0]);
 
     let source;

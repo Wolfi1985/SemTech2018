@@ -1,18 +1,21 @@
 <div class="container-fluid text-center mt-4">
   <h1>Visualizing RDF using D3</h1>
-  <button type="button" class="btn btn-outline-primary float-left" (click)="filter()">Filter</button>
-  <!--div class="form-check checkbox-slider--a">
-    <label>
-      <input type="checkbox">
-      <span>Details</span>
-    </label>
-  </div>
-</div-->
-<modal-filter #modalFilter (loadData)="fetchData($event)"></modal-filter>
 
-<svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
-  <g [zoomableOf]="svg">
-    <g [linkVisual]="link" *ngFor="let link of links"></g>
-    <g [nodeVisual]="node" *ngFor="let node of nodes" [draggableNode]="node" [draggableInGraph]="graph"></g>
-  </g>
-</svg>
+  <div *ngIf="showButtons === true">
+    <button type="button" class="btn btn-outline-primary float-left" (click)="filter()">Filter</button>
+    <div class="switch float-right">
+      <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" [(ngModel)]="showDetails" (change)="setShowDetails()">
+      <label for="cmn-toggle-4"></label>
+    </div>
+    <h4 class="float-right mr-2">Details</h4>
+  </div>
+
+  <modal-filter #modalFilter (loadData)="fetchData($event)"></modal-filter>
+
+  <svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
+    <g [zoomableOf]="svg">
+      <g [linkVisual]="link" *ngFor="let link of links"></g>
+      <g [nodeVisual]="node" *ngFor="let node of nodes" [draggableNode]="node" [draggableInGraph]="graph"></g>
+    </g>
+  </svg>
+</div>

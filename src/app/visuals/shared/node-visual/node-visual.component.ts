@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Node } from '../../../d3';
+import * as d3 from 'd3';
+
+import { MainService } from '../../../main/main.service';
 
 @Component({
   selector: '[nodeVisual]',
@@ -8,8 +11,21 @@ import { Node } from '../../../d3';
 })
 export class NodeVisualComponent {
   @Input('nodeVisual') node: Node;
+  showDetail: boolean;
+  activateDetail: boolean;
 
-  showDetails() {
-    console.log(this.node.id);
+  constructor(private mainService: MainService) {
+    this.showDetail = false;
+    this.mainService.showDetails.subscribe((value) => {
+      this.activateDetail = value;
+      return value;
+    });
+  }
+
+  showPopup(node: any) {
+    this.showDetail = true;
+  }
+  hidePopup(node: any) {
+    this.showDetail = false;
   }
 }

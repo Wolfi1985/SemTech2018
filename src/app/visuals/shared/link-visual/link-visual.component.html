@@ -1,7 +1,22 @@
 <svg:g>
-  <svg:line class="link" [attr.x1]="link.source.x" [attr.y1]="link.source.y" [attr.x2]="link.target.x" [attr.y2]="link.target.y">
+  <svg:line class="link" [attr.x1]="link.source.x" [attr.y1]="link.source.y" [attr.x2]="link.target.x" [attr.y2]="link.target.y" marker-end="url(#arrow)">
   </svg:line>
-  <svg:text class="node-name" [attr.x]="link.source.x+(link.target.x-link.source.x)/2" [attr.y]="link.source.y+(link.target.y-link.source.y)/2" [attr.font-size]="link.fontSize">
+  <svg:text class="link-text" [attr.x]="link.source.x+(link.target.x-link.source.x)/2" [attr.y]="link.source.y+(link.target.y-link.source.y)/2" [attr.font-size]="link.fontSize">
   {{link.predicate}}
   </svg:text>
+  <svg width="300" height="200">
+    <defs>
+      <marker
+        id="arrow"
+        markerUnits="strokeWidth"
+        markerWidth="22"
+        markerHeight="22"
+        viewBox="0 0 22 22"
+        refX="15"
+        refY="6"
+        orient="auto">
+        <path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: rgb(176,212,243);"></path>
+      </marker>
+    </defs>
+  </svg>
 </svg:g>

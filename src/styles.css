@@ -8,7 +8,7 @@
     stroke-width: 1px;
   }
   marker {
-      stroke: #999;
+      stroke: rgb(176,212,243);
       fill:rgba(124,240,10,0);
   }
   .node-text {
@@ -16,6 +16,15 @@
     fill:black;
   }
   .link-text {
-    font: 9px sans-serif;
+    font: 15px sans-serif;
     fill:grey;
   }
+  .arrow{
+		stroke-width:5;
+		stroke:rgb(176,212,243);
+		stroke-dasharray:5, 5;
+  }
+  .onoffswitch1 {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}

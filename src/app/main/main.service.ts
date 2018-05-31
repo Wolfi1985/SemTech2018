@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { ModalFilterComponent } from '../modal-filter/modal-filter.component';
 
@@ -11,12 +12,19 @@ export class MainService {
 
   private modalFilterWindow: ModalFilterComponent;
 
+  public showDetails: BehaviorSubject<boolean>;
+
   constructor(private http: Http) {
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'q=0.8;application/json;q=0.9'
     });
     this.options = new RequestOptions({ headers: this.headers });
+    this.showDetails = new BehaviorSubject(false);
+  }
+
+  public setShowDetails(show: boolean) {
+    this.showDetails.next(show);
   }
 
   public fetchData(url: string, callback: Function) {
