@@ -96,11 +96,12 @@ export class AppComponent implements OnInit {
   drawGraph() {
     // call draw graph method
     const graph = this.mainService.triplesToGraph(this.data.data);
-
+    console.log(graph);
     // setting nodes
     for (const g in graph.nodes) {
       if (g !== null && g !== undefined) {
-        this.nodes.push(new Node(graph.nodes[g].id, graph.nodes[g].label, graph.nodes[g].weight, false));
+        this.nodes.push(new Node(graph.nodes[g].id, graph.nodes[g].label, graph.nodes[g].weight,
+          false, graph.nodes[g].link, graph.nodes[g].log));
       }
     }
     this.nodes[0].isParent = true;

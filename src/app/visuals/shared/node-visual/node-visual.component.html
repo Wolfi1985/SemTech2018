@@ -9,10 +9,11 @@
     {{node.id}} {{node.weight}}
   </svg:text -->
   <g *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize">
-    <rect x="2" y="2" rx="10" ry="10" width="160" height="80" fill="light-grey" fill-opacity="0.4"></rect>
+    <rect x="2" y="2" rx="10" ry="10" width="350" height="80" fill="light-grey" fill-opacity="0.4"></rect>
     <text x="7" y="7" font-family="Verdana" font-size="15" fill="white">
-      <tspan x="5" dy="1.5em">{{node.id}}</tspan>
-      <tspan x="5" dy="1.5em">{{node.weight}}</tspan>
+      <tspan x="8" dy="1.5em"> {{node.id}} </tspan>
+      <tspan x="8" dy="1.5em"> {{node.link}} </tspan>
+      <tspan x="8" dy="1.5em"> times searched: {{node.itemCount}}</tspan>
     </text>
   </g>
 </svg:g>

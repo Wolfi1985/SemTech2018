@@ -12,19 +12,28 @@ export class Node implements d3.SimulationNodeDatum {
 
 
   id: string;
+  link: string;
   label: string;
   weight: number;
   linkCount = 0;
   isParent: boolean;
+  log: any;
+  itemCount: number;
 
 
-  constructor(id, label, weight, isParent) {
-
+  constructor(id, label, weight, isParent, link, log) {
+    console.log(link);
     this.id = id;
+    this.link = link;
     this.label = label;
     this.weight = weight;
     this.index = 0;
     this.isParent = isParent;
+    this.log = log;
+    this.itemCount = 0;
+    if (this.log !== null && this.log !== undefined) {
+      this.itemCount = this.log.itemCount;
+    }
   }
 
   normal = () => {

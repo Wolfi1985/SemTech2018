@@ -57,43 +57,50 @@ export class MainService {
     const graph = { nodes: [], links: [] };
 
     let subjId;
+    let subjectLink;
+    let objectLink;
     let predId;
     let objId;
-    let log;
-    let visited;
+    let objectLog;
+    let subjectLog;
 
     triples.forEach((triple) => {
 
       console.log(triple);
+      if (this.checkIfExists(triple.subjectName)) {
+        subjId = triple.subjectName;
+      }
       if (this.checkIfExists(triple.subject)) {
-        subjId = triple.subject;
-        console.log(subjId);
+        subjectLink = triple.subject;
       }
       if (this.checkIfExists(triple.predicate)) {
         predId = triple.predicate;
       }
-      if (this.checkIfExists(triple.object)) {
-        objId = triple.object;
+      if (this.checkIfExists(triple.objectName)) {
+        objId = triple.objectName;
       }
-
-      if (this.checkIfExists(triple.log)) {
-        log = triple.log;
-
-        if (this.checkIfExists(log.visited)) {
-          visited = log.visited;
-        }
+      if (this.checkIfExists(triple.object)) {
+        objectLink = triple.object;
+      }
+      if (this.checkIfExists(triple.subjectLog)) {
+        subjectLog = triple.subjectLog;
+      }
+      if (this.checkIfExists(triple.objectLog)) {
+        objectLog = triple.objectLog;
       }
 
       let subjNode = this.filterNodesById(graph.nodes, subjId)[0];
       let objNode = this.filterNodesById(graph.nodes, objId)[0];
 
       if (subjNode == null) {
-        subjNode = { id: subjId, label: subjId, weight: 1, visited: visited };
+        subjNode = { id: subjId, label: subjId, weight: 1, link: subjectLink, log: subjectLog };
         graph.nodes.push(subjNode);
       }
 
       if (objNode == null) {
-        objNode = { id: objId, label: objId, weight: 1, visited: visited };
+        objNode = {
+          id: objId, label: objId, weight: 1, link: objectLink, log: objectLog
+        };
         graph.nodes.push(objNode);
       }
 
