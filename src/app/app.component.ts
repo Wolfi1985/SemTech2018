@@ -78,7 +78,9 @@ export class AppComponent implements OnInit {
   /**set data when fetched*/
   fetchDataDone(data: any) {
     this.data = data;
+
     console.log(this.data);
+
     this.drawGraph();
     this.showButtons = true;
   }
@@ -94,9 +96,11 @@ export class AppComponent implements OnInit {
    * will be restructured
   */
   drawGraph() {
-    // call draw graph method
+    // call draw graph method to get nodes and links
     const graph = this.mainService.triplesToGraph(this.data.data);
+
     console.log(graph);
+
     // setting nodes
     for (const g in graph.nodes) {
       if (g !== null && g !== undefined) {
@@ -109,13 +113,14 @@ export class AppComponent implements OnInit {
 
     let source;
     let target;
+
     // setting nodes
     for (const l in graph.links) {
       if (l !== null || l !== undefined) {
-        // console.log(graph.links[l].source);
+
         source = this.getNode(graph.links[l].source);
         target = this.getNode(graph.links[l].target);
-        // console.log(source);
+
         this.links.push(new Link(source, target, graph.links[l].predicate));
       }
     }
@@ -152,6 +157,7 @@ export class AppComponent implements OnInit {
   startSimulation() {
     this.graph.initSimulation(this.options);
   }
+
   get options() {
     return this._options = {
       width: window.innerWidth,

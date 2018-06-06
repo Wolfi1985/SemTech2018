@@ -45,8 +45,10 @@ export class MainService {
   }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred while loading data', error);
-    if (error.status === 404) {
+    if (error.status === 404 || error.status === 500) {
       alert('Data couldn\'t be found, please enter a valid ID!');
+    } else {
+      alert('Error occured');
     }
     return Promise.reject(error.message || error);
   }

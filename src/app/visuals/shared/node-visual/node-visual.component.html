@@ -1,4 +1,4 @@
-<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'" (mouseover)="showPopup()" (mouseout)="hidePopup(node)">
+<svg:g [attr.transform]="'translate(' + node.x + ',' + node.y + ')'" (mouseenter)="showPopup()">
   <svg:circle class="node" [attr.fill]="node.color" cx="0" cy="0" [attr.r]="node.r">
   </svg:circle>
   <svg:text *ngIf="(showDetail===false && activateDetail===false) || (showDetail===true && activateDetail===false) || (showDetail===false && activateDetail===true)"
@@ -8,12 +8,12 @@
   <!--svg:text *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize">
     {{node.id}} {{node.weight}}
   </svg:text -->
-  <g *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize">
+  <svg:g *ngIf="showDetail===true && activateDetail===true" class="node-name" [attr.font-size]="node.fontSize" (mouseleave)="hidePopup(node)">
     <rect x="2" y="2" rx="10" ry="10" width="350" height="80" fill="light-grey" fill-opacity="0.4"></rect>
     <text x="7" y="7" font-family="Verdana" font-size="15" fill="white">
       <tspan x="8" dy="1.5em"> {{node.id}} </tspan>
       <tspan x="8" dy="1.5em"> {{node.link}} </tspan>
       <tspan x="8" dy="1.5em"> times searched: {{node.itemCount}}</tspan>
     </text>
-  </g>
+  </svg:g>
 </svg:g>
